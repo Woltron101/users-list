@@ -31,7 +31,7 @@
                 <th>Phone</th>
                 <th>Website</th>
                 <th class="sort" ng-click="users.filterOrderBy('company.name')">Company Name<span class="glyphicon glyphicon-menu-down"></span></th>
-                <th>Oprions</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -43,7 +43,9 @@
             orderBy: users.orderBy : users.reverse" id="{{user.id}}" repeat-end>
                 <td>{{user.name}}</td>
                 <td>{{user.username}}</td>
-                <td>{{user.email}}</td>
+                <td>{{user.email}}
+                    <span class="glyphicon glyphicon-copy" ngclipboard data-clipboard-text="{{user.email}}"></sapn>
+                </td>
                 <td>{{user.address.street}}</td>
                 <td>{{user.address.city}}</td>
                 <td>{{users.distance(user.address.geo.lat, user.address.geo.lng)}}</td>
@@ -57,8 +59,8 @@
             </tr>
         </tbody>
     </table>
-    <button class="btn btn-primary">Add User</button>
-    <button ng-click="users.getLocation()">geo</button>
+    <button class="btn btn-primary" ng-click="users.addNewUser()">Add User</button>
+
 </div>
 
 <div class="modal-wrap" ng-show="users.modal.active" ng-click="users.hideModal($event)">
@@ -71,7 +73,7 @@
             </div>
             <div class="form-group claerfix">
                 <label for="username">username</label>
-                <input type="text" id="username" class="form-control" ng-model="users.user.username" list-user="{{users.invalid.usernames}}" users="users.users">
+                <input type="text" id="username" class="form-control" ng-model="users.user.username">
 
             </div>
             <div class="form-group claerfix">
@@ -122,8 +124,10 @@
                 <label for="bs">company bs</label>
                 <input type="text" id="bs" class="form-control" ng-model="users.user.company.bs">
             </div>
+            <button ng-click="users.editSave()" class="btn btn-primary">Edit</button>
         </form>
     </div>
 </div>
 
+{{users.user}}
 <!--That username is taken. Try another.-->

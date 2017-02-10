@@ -1,6 +1,7 @@
 var users = angular.module('users', [
         'ui.router',
-        'ngStorage'
+        'ngStorage',
+        'ngclipboard'
     ])
     .config(['$stateProvider', '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {

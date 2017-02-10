@@ -43,13 +43,47 @@
             showModal();
 
         }
+        vm.editSave = function() {
+            var index = vm.user.id;
+            vm.users[index - 1] = vm.user;
+            console.log("vm.users ", vm.users);
+            vm.modal.active = false;
+        }
         vm.modal = {}
+        vm.addNewUser = function() {
+            vm.user = {
+                id: vm.users.length,
+                name: "",
+                username: "",
+                email: "",
+                address: {
+                    street: "",
+                    suite: "",
+                    city: "",
+                    zipcode: "",
+                    geo: {
+                        lat: "",
+                        lng: ""
+                    }
+                },
+                phone: "",
+                website: "",
+                company: {
+                    name: "",
+                    catchPhrase: "",
+                    bs: ""
+                }
+            }
 
-        function showModal() {
-            vm.modal.active = true;
+            // if (key === 'id') vm.user[key] = users.length + 1;
+            // else value = "";
+            showModal();
+
         }
 
+
         vm.hideModal = function(e) {
+            if (!e) return;
             var target = angular.element(e.target);
             if (target.hasClass('modal-wrap') || target.hasClass('close') || e.keyCode === 27) {
                 vm.modal.active = false;
@@ -61,18 +95,7 @@
             emails: "",
             companies: ""
         }
-        vm.pos = {};
-        vm.getLocation = function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
 
-                    vm.pos.lat = position.coords.latitude;
-                    vm.pos.lon = position.coords.longitude;
-                });
-            } else {
-                alert("Geolocation is not supported");
-            }
-        }
 
         function invalid() {
             vm.users.forEach(function(user) {
@@ -83,19 +106,7 @@
                 // console.log("vm.invalid ", vm.invalid);
         }
 
-        // function distance(lat1, lon1, lat2, lon2, unit) {
-        //     var radlat1 = Math.PI * lat1 / 180
-        //     var radlat2 = Math.PI * lat2 / 180
-        //     var theta = lon1 - lon2
-        //     var radtheta = Math.PI * theta / 180
-        //     var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-        //     dist = Math.acos(dist)
-        //     dist = dist * 180 / Math.PI
-        //     dist = dist * 60 * 1.1515
-        //     if (unit == "K") { dist = dist * 1.609344 }
-        //     if (unit == "N") { dist = dist * 0.8684 }
-        //     return dist
-        // }
+
         vm.distance = function(lat1, lon1) {
             var radlat1 = Math.PI * lat1 / 180
             var radlat2 = Math.PI * $rootScope.pos.lat / 180
@@ -108,6 +119,10 @@
             dist = dist * 1.609344
             dist = dist.toFixed(0)
             return dist
+        }
+
+        function showModal() {
+            vm.modal.active = true;
         }
     }
 })();

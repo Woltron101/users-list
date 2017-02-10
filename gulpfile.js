@@ -77,6 +77,7 @@ gulp.task('html:templ', function() {
 
 gulp.task('js', function() {
     gulp.src([
+            'src/js/vendor/ngclipboard.min.js',
             'src/js/app.js',
             'src/js/controllers/mainCtrl.js',
             'src/js/controllers/usersCtrl.js',
