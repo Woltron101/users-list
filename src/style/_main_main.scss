@@ -1,4 +1,74 @@
-﻿label.input-file-wraper {
+﻿body {
+    font-size: 11px;
+}
+
+table {
+    width: 100%;
+}
+
+.modal-wrap {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.modal-inner {
+    position: absolute;
+    background-color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 30px;
+    padding: 30px;
+    width: 600px;
+}
+
+.close {
+    padding: 5px;
+    margin-right: 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.modal-inner label,
+.modal-inner input {
+    display: inline-block;
+}
+
+.modal-inner label {
+    width: 20%;
+    margin-bottom: 0
+}
+
+.modal-inner input {
+    width: 79%;
+}
+
+.form-group {
+    position: relative;
+}
+
+.modal-inner span {
+    display: block;
+    padding-left: 21%;
+    text-align: left;
+    position: absolute;
+    color: red;
+}
+
+input.ng-invalid.ng-touched {
+    background-color: pink;
+}
+
+.glyphicon {
+    float: right;
+}
+
+label.input-file-wraper {
     position: relative;
     width: 100%;
     input {
@@ -28,4 +98,28 @@
 
 img {
     max-width: 100%;
+}
+
+.sort {
+    cursor: pointer;
+}
+
+.sort .glyphicon {
+    opacity: 0.3;
+}
+
+.sort .glyphicon.active {
+    opacity: 1;
+}
+
+.glyphicon {
+    cursor: pointer;
+}
+
+.glyphicon.glyphicon-copy,
+.glyphicon.glyphicon-pencil,
+.glyphicon.glyphicon-trash {
+    // color: #337ab7;
+    font-size: 16px;
+    padding: 0 5px;
 }

@@ -11,81 +11,31 @@ var users = angular.module('users', [
                     templateUrl: 'templates/users.html',
                     controller: 'usersController as users'
                 })
+                .state('users.add', {
+                    url: 'users/add',
+                    templateUrl: 'templates/modal.html'
+                })
+                .state('users.edit', {
+                    url: 'users/edit',
+                    templateUrl: 'templates/modal.html'
+                })
 
             $urlRouterProvider.otherwise('/users');
         }
     ])
-    // .directive('elemReady', function($parse) {
-    //     return {
-    //         restrict: 'A',
-    //         link: function($scope, elem, attrs) {
-
-//             elem.ready(function() {
-//                 $scope.$apply(function() {
-//                     var func = $parse(attrs.elemReady);
-//                     func($scope);
-//                 })
-//             })
-
-//         }
-//     }
-// })
-.directive("repeatEnd", function($timeout) {
-        return {
-            restrict: "A",
-            link: function(scope, element, attrs) {
-                if (scope.$last) {
-                    $timeout(function() {
-                        // alert('last');
-                    });
-                }
-            }
-        };
-    })
-    .directive('listUser', function() {
-        return {
-            require: 'ngModel',
-            scope: {
-                users: '='
-            },
-            link: function(scope, elem, attr, ngModel) {
-                // var list = attr[list].split(',');
-                // console.log("list ", attr[users]);
 
 
-                // //For DOM -> model validation
-                // ngModel.$parsers.unshift(function(value) {
-                //     var valid = list.indexOf(value) === -1;
-                //     console.log("users ", attrs['users']);
-                //     console.log("list ", list);
-                //     ngModel.$setValidity('list', valid);
-                //     return valid ? value : undefined;
-                // });
 
-                // //For model -> DOM validation
-                // ngModel.$formatters.unshift(function(value) {
-                //     ngModel.$setValidity('list', list.indexOf(value) === -1);
-                //     return value;
-                // });
-            }
-        };
-    })
-
-// .directive('ensureExpression', ['$http', '$parse', function($http, $parse) {
-//     return {
-//         require: 'ngModel',
-//         link: function(scope, ele, attrs, ngModelController) {
-//             scope.$watch(attrs.ngModel, function(value) {
-//                 var booleanResult = $parse(attrs.ensureExpression)(scope);
-//                 console.log("attrs.ensureExpression ", attrs.ensureExpression);
-//                 console.log("booleanResult ", booleanResult);
-//                 ngModelController.$setValidity('expression', booleanResult);
-//             });
-//         }
-//     };
-// }]);
-.run(function($rootScope) {
+.run(function($rootScope, $http) {
     $rootScope.pos = {};
+    $rootScope.users = [];
+
+    $http({
+        method: 'GET',
+        url: 'https://jsonplaceholder.typicode.com/users'
+    }).then(function(response) {
+        $rootScope.users = response.data;
+    });
 
     getLocation();
 
@@ -95,6 +45,9 @@ var users = angular.module('users', [
 
                 $rootScope.pos.lat = position.coords.latitude;
                 $rootScope.pos.lng = position.coords.longitude;
+            }, function(error) {
+                console.log("error ", error);
+
             });
         } else {
             alert("Geolocation is not supported");

@@ -14,65 +14,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
     <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
     <script src="js/main.js"></script>
-    <style>
-        body {
-            font-size: 11px;
-        }
-        
-        table {
-            width: 100%;
-        }
-        
-        .modal-wrap {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.9);
-        }
-        
-        .modal-inner {
-            position: absolute;
-            background-color: #fff;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            margin: 30px;
-            padding: 30px;
-            width: 600px;
-        }
-        
-        .close {
-            padding: 5px;
-            margin-right: 5px;
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
-        
-        .modal-inner label,
-        .modal-inner input {
-            display: inline-block;
-        }
-        
-        .modal-inner label {
-            width: 20%;
-            margin-bottom: 0
-        }
-        
-        .modal-inner input {
-            width: 79%;
-        }
-        
-        input.ng-invalid {
-            background-color: pink;
-        }
-        
-        .glyphicon {
-            float: right;
-        }
-    </style>
 
     <body ng-controller="mainController as main">
         <div class="container">

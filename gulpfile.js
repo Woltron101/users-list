@@ -81,8 +81,12 @@ gulp.task('js', function() {
             'src/js/app.js',
             'src/js/controllers/mainCtrl.js',
             'src/js/controllers/usersCtrl.js',
-            'src/js/controllers/editCtrl.js',
-            'src/js/filters/columnFilter.js'
+            'src/js/controllers/sortCtrl.js',
+            'src/js/services/users.js',
+            'src/js/services/distance.js',
+            'src/js/filters/columnFilter.js',
+            'src/js/directives/usersReadyDir.js',
+            'src/js/directives/valideateDir.js',
         ])
         .pipe(concat('main.js'))
         // .pipe(uglify())
