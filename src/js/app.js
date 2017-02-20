@@ -12,11 +12,11 @@ var users = angular.module('users', [
                     controller: 'usersController as users'
                 })
                 .state('users.add', {
-                    url: 'users/add',
+                    url: '/add',
                     templateUrl: 'templates/modal.html'
                 })
                 .state('users.edit', {
-                    url: 'users/edit',
+                    url: '/edit',
                     templateUrl: 'templates/modal.html'
                 })
 
@@ -26,31 +26,32 @@ var users = angular.module('users', [
 
 
 
-.run(function($rootScope, $http) {
-    $rootScope.pos = {};
+.run(function($rootScope, $http, $localStorage) {
+    $localStorage.pos = {};
     $rootScope.users = [];
 
-    $http({
-        method: 'GET',
-        url: 'https://jsonplaceholder.typicode.com/users'
-    }).then(function(response) {
-        $rootScope.users = response.data;
-    });
-
     getLocation();
+    getUsers();
+
+    function getUsers() {
+        $http({
+            method: 'GET',
+            url: 'https://jsonplaceholder.typicode.com/users'
+        }).then(function(response) {
+            $rootScope.users = response.data;
+        });
+    }
 
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-
-                $rootScope.pos.lat = position.coords.latitude;
-                $rootScope.pos.lng = position.coords.longitude;
-            }, function(error) {
-                console.log("error ", error);
-
-            });
+                $localStorage.pos.lat = position.coords.latitude;
+                $localStorage.pos.lng = position.coords.longitude;
+                getUsers();
+            })
         } else {
             alert("Geolocation is not supported");
         }
     }
+
 });

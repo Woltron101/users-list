@@ -123,3 +123,33 @@ img {
     font-size: 16px;
     padding: 0 5px;
 }
+
+.modal-inner label span {
+    color: red;
+    position: static;
+    padding: 0;
+    display: inline;
+}
+
+td.mail {
+    position: relative;
+}
+
+.copied {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+    right: 37px;
+    top: 50%;
+    transform: translateY(-50%);
+    &:after {
+        content: '';
+        position: absolute;
+        right: -6px;
+        top: 50%;
+        margin-top: -3px;
+        border: 3px solid transparent;
+        border-left: 3px solid rgba(0, 0, 0, 0.7);
+    }
+}

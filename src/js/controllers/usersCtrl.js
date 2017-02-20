@@ -6,9 +6,9 @@
         .module('users')
         .controller('usersController', usersController);
 
-    usersController.inject = ['$http', '$rootScope', 'distance', '$state'];
+    usersController.inject = ['$http', '$rootScope', 'distance', '$state', '$timeout'];
 
-    function usersController($http, $rootScope, distance, $state) {
+    function usersController($http, $rootScope, distance, $state, $timeout) {
         var vm = this;
         var root = $rootScope;
 
@@ -50,7 +50,14 @@
             var target = angular.element(e.target);
             if (target.hasClass('modal-wrap') || target.hasClass('close') || e.keyCode === 27) {
                 vm.modal.active = false;
+                $state.go('users');
             }
+        }
+        vm.showCopiedLabel = function(user) {
+            user.showEmailCopied = true;
+            $timeout(function() {
+                user.showEmailCopied = false;
+            }, 1000)
         }
 
         function showModal() {

@@ -38,7 +38,7 @@
                     Streed
                     <span class="glyphicon glyphicon-menu-{{sort.sortIconClass('street')}}"></span>
                 </th>
-                <th>Distance, km</th>
+                <th ng-if="users.distance($root.users[0].address.geo.lat, $root.users[0].address.geo.lng)">Distance, km</th>
                 <th>Phone</th>
                 <th>Website</th>
                 <th class="sort" ng-click="sort.filterOrderBy('company.name')">
@@ -57,12 +57,13 @@
             orderBy: sort.orderBy : sort.reverse" id="{{user.id}}" repeat-end>
                 <td>{{user.name}}</td>
                 <td>{{user.username}}</td>
-                <td>{{user.email}}
-                    <span class="glyphicon glyphicon-copy" ngclipboard data-clipboard-text="{{user.email}}"></sapn>
+                <td class="mail">{{user.email}}
+                    <span class="copied" ng-show="user.showEmailCopied">Email copied to clipboard</span>
+                    <span class="glyphicon glyphicon-copy" ngclipboard data-clipboard-text="{{user.email}}" ng-click="users.showCopiedLabel(user)"></sapn>
                 </td>
                 <td>{{user.address.city}}</td>
                 <td>{{user.address.street}}</td>
-                <td>{{(users.distance(user.address.geo.lat, user.address.geo.lng))?users.distance(user.address.geo.lat, user.address.geo.lng):''}}</td>
+                <td ng-if="users.distance(user.address.geo.lat, user.address.geo.lng)">{{users.distance(user.address.geo.lat, user.address.geo.lng)}}</td>
                 <td>{{user.phone}}</td>
                 <td>{{user.website}}</td>
                 <td>{{user.company.name}}</td>
@@ -74,5 +75,6 @@
         </tbody>
     </table>
     <button class="btn btn-primary" ng-click="users.addNewUser()">Add User</button>
+    <div id="output"></div>
 </div>
 <div ui-view></div>

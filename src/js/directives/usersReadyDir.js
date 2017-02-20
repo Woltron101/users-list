@@ -6,9 +6,9 @@
         .module('users')
         .directive('repeatEnd', repeatEnd);
 
-    repeatEnd.inject = ['$timout'];
+    repeatEnd.inject = ['$timout', '$sessionStorage'];
 
-    function repeatEnd($timeout) {
+    function repeatEnd($timeout, $sessionStorage) {
 
         var directive = {
             link: link,
@@ -17,9 +17,10 @@
         return directive;
 
         function link(scope, element, attrs) {
-            if (scope.$last) {
+            if (scope.$last && !$sessionStorage.usersReady) {
                 $timeout(function() {
-                    // alert('users viewd');
+                    alert('Users are shown');
+                    $sessionStorage.usersReady = true;
                 });
             }
         }
